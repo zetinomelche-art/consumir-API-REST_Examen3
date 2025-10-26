@@ -4,7 +4,6 @@ const form = document.getElementById('employeeForm');
 // Escuchamos el evento submit
 form.addEventListener('submit', function (e) {
     e.preventDefault(); // Evita el refresco de la página
-
     // Construimos el objeto con los datos del formulario
     const empleado = {
         nombre: form.nombre.value,
@@ -37,8 +36,9 @@ form.addEventListener('submit', function (e) {
             alert(data); // Muestra el mensaje: "Empleado guardado exitosamente"
             closeModal(); // Cierra el modal
             form.reset(); // Limpia el formulario
-            // Aquí puedes volver a cargar la tabla si lo necesitas:
-            // cargarEmpleados();
+            // Aquí puedes volver a cargar la tabla si lo necesitas
+            //crecargarpagina para ver los cambios reflejados en la tabla
+            location.reload();
         })
         .catch(error => {
             console.error("Error:", error);

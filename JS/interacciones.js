@@ -10,6 +10,13 @@ function openModal() {
 
 function closeModal() {
     document.getElementById('employeeModal').classList.add('hidden');
-    document.getElementById('employeeForm').reset();
-    document.getElementById("titulo_form_edit_add").textContent = "Agregar Empleado";
+}
+
+function openModalEdit() {
+    document.getElementById('employeeModalEdit').classList.remove('hidden');
+}
+
+function closeModalEdit() {
+    document.getElementById('employeeModalEdit').classList.add('hidden');
+    document.getElementById('employeeFormEdit').reset();
 }
