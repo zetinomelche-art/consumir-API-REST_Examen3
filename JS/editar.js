@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             estado: empleadoEditado.estado
         });
 
+
         fetch("http://127.0.0.1:8080/examen3/guardar",
             {
                 method: "POST",
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(data); // Muestra el mensaje: "Empleado guardado exitosamente"
             closeModalEdit();
             //crecargarpagina para ver los cambios reflejados en la tabla
-            location.reload();
+            cargarEmpleados();
         })
 
     });
