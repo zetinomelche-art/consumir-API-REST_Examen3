@@ -8,7 +8,7 @@ tableBodyElim.addEventListener('click', function (event) {
 
         const id = event.target.dataset.id;
         const apiUrl = "http://127.0.0.1:8080/examen3/elim/" + id;
-        // Confirmación antes de eliminar
+
         Swal.fire({
             title: '¿Estás seguro?',
             text: "¡No podrás revertir esto!",
@@ -18,35 +18,21 @@ tableBodyElim.addEventListener('click', function (event) {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, eliminarlo'
         }).then((result) => {
+
             if (result.isConfirmed) {
-                // Realizar la petición DELETE
+
                 fetch(apiUrl, {
                     method: 'DELETE'
+                }).then(data => {
+                    Swal.fire(
+                        'Eliminado',
+                        data,
+                        'success'
+                    ).then(() => {
+                        cargarEmpleados();
+                    }
+                    );
                 })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Error al eliminar el empleado");
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        Swal.fire(
-                            'Eliminado',
-                            data,
-                            'success'
-                        ).then(() => {
-                            cargarEmpleados();
-                        }
-                        );
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        Swal.fire(
-                            'Error',
-                            'Hubo un problema al eliminar el empleado.',
-                            'error'
-                        );
-                    });
             }
         });
     }

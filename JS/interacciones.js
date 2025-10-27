@@ -1,8 +1,3 @@
-function showSection(section) {
-    document.getElementById('empleados-section').classList.add('hidden');
-    document.getElementById('estadisticas-section').classList.add('hidden');
-    document.getElementById(section + '-section').classList.remove('hidden');
-}
 
 function openModal() {
     document.getElementById('employeeModal').classList.remove('hidden');

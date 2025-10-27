@@ -8,14 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = event.target.dataset.id;
             const apiUrl = "http://127.0.0.1:8080/examen3/editar/" + id;
 
-            // Abrimos el modal
             openModalEdit();
 
-            // Obtenemos datos del empleado
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(emp => {
-                    // Rellenamos los campos del formulario
                     form.id_empleadoEdit.value = emp.id_empleado;
                     form.nombreEdit.value = emp.nombre;
                     form.apellidoEdit.value = emp.apellido;
@@ -28,16 +25,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     form.direccionEdit.value = emp.direccion;
                     form.estadoEdit.value = emp.estado;
                 })
-                .catch(error => console.error("Error al obtener empleado:", error));
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Hubo un problema al cargar los datos del empleado.',
+                    });
+                });
         }
     });
 
-    // Opcional: submit del formulario
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-
-        // Construimos el objeto con los datos del formulario
         const empleadoEditado = {
             id_empleado: parseInt(form.id_empleadoEdit.value),
             nombre: form.nombreEdit.value,
@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
             estado: form.estadoEdit.value
         };
 
-        //ver los datos que se enviarán
         const id = empleadoEditado.id_empleado;
         console.log("Datos editados:", {
             id_empleado: id,
@@ -76,18 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     "Content-Type": "application/json"
                 }, body: JSON.stringify(empleadoEditado)
             }
-        ).then(response => {
-            if (!response.ok) {
-                throw new Error("Error al guardar el empleado");
-                alert("Error al guardar el empleado");
-            }
-            return response.text(); // El backend devuelve texto, no JSON
-        }).then(data => {
-            alert(data); // Muestra el mensaje: "Empleado guardado exitosamente"
+        ).then(data => {
             closeModalEdit();
-            //crecargarpagina para ver los cambios reflejados en la tabla
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Empleado agregado correctamente.',
+            });
             cargarEmpleados();
-        })
-
+        });
     });
 });

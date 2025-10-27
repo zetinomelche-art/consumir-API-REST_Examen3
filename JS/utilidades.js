@@ -1,6 +1,3 @@
-/**
- * Carga empleados desde una API y los renderiza en una tabla fija.
- */
 function cargarEmpleados() {
     const apiUrl = "http://127.0.0.1:8080/examen3/listarEmpleados";
     const tableBodyId = "employeeTableBody";
@@ -41,7 +38,6 @@ function cargarEmpleados() {
         tableBody.appendChild(row);
     }
 
-    // Limpiar la tabla antes de cargar nuevos datos
     tableBody.innerHTML = "";
 
     fetch(apiUrl)
